@@ -33,7 +33,7 @@ namespace lm {
 	TemplateLanguageModule g_lm;
 
 	extern "C"
-	GOLM_EXPORT ILanguageModule* GetLanguageModule() {
+	LM_EXPORT ILanguageModule* GetLanguageModule() {
 		return &g_lm;
 	}
 }

@@ -1,15 +1,15 @@
 {
 	"fileVersion": 1,
 	"version": 1,
-	"versionName": "1.0",
+	"versionName": "${LM_VERSION}",
 	"friendlyName": "Template language module",
 	"language": "TODO",
 	"description": "Adds support for TODO plugins",
 	"createdBy": "untrustedmodders",
 	"createdByURL": "https://github.com/untrustedmodders/",
 	"docsURL": "https://github.com/untrustedmodders/template-lang-module/README.md",
-	"downloadURL": "https://github.com/untrustedmodders/template-lang-module/releases/download/v1.0/template-lang-module.zip",
-	"updateURL": "https://raw.githubusercontent.com/untrustedmodders/template-lang-module/main/template-lang-module.json",
+	"downloadURL": "https://github.com/untrustedmodders/template-lang-module/releases/download/v${LM_VERSION}/${LM_PACKAGE}.zip",
+	"updateURL": "https://untrustedmodders.github.com/template-lang-module/template-lang-module.json",
 	"supportedPlatforms": [],
 	"forceLoad": false
 }

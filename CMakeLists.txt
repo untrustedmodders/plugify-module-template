@@ -29,7 +29,7 @@ add_library(${PROJECT_NAME} SHARED ${LM_SOURCES})
 target_link_libraries(${PROJECT_NAME} PRIVATE plugify::plugify)
 
 include(GenerateExportHeader)
-generate_export_header(${PROJECT_NAME} EXPORT_MACRO_NAME GOLM_EXPORT EXPORT_FILE_NAME ${CMAKE_BINARY_DIR}/exports/module_export.h)
+generate_export_header(${PROJECT_NAME} EXPORT_MACRO_NAME LM_EXPORT EXPORT_FILE_NAME ${CMAKE_BINARY_DIR}/exports/module_export.h)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/exports)
 
 if(APPLE)
@@ -37,3 +37,11 @@ if(APPLE)
 elseif(UNIX)
 	target_link_options(${PROJECT_NAME} PRIVATE "-Wl,--version-script,${CMAKE_CURRENT_SOURCE_DIR}/sym/version_script.lds")
 endif()
+
+set(LM_VERSION "${CMAKE_PROJECT_VERSION}")
+set(LM_PACKAGE "${PROJECT_NAME}")
+
+configure_file(
+	${CMAKE_SOURCE_DIR}/${PROJECT_NAME}.pmodule.in
+	${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pmodule
+)
