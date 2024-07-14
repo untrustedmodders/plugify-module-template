@@ -4,7 +4,7 @@
 using namespace plugify;
 
 namespace lm {
-	InitResult TemplateLanguageModule::Initialize(std::weak_ptr<IPlugifyProvider> provider, const IModule& module) {
+	InitResult TemplateLanguageModule::Initialize(std::weak_ptr<IPlugifyProvider> provider, ModuleRef module) {
 		// TODO: implement
 		return InitResultData{};
 	}
@@ -13,20 +13,20 @@ namespace lm {
 		// TODO: implement
 	}
 
-	LoadResult TemplateLanguageModule::OnPluginLoad(const IPlugin& plugin) {
+	LoadResult TemplateLanguageModule::OnPluginLoad(PluginRef plugin) {
 		// TODO: implement
 		return ErrorData{ "Loading not implemented" };
 	}
 
-	void TemplateLanguageModule::OnPluginStart(const IPlugin& plugin) {
+	void TemplateLanguageModule::OnPluginStart(PluginRef plugin) {
 		// TODO: implement
 	}
 
-	void TemplateLanguageModule::OnPluginEnd(const IPlugin& plugin) {
+	void TemplateLanguageModule::OnPluginEnd(PluginRef plugin) {
 		// TODO: implement
 	}
 
-	void TemplateLanguageModule::OnMethodExport(const IPlugin& plugin) {
+	void TemplateLanguageModule::OnMethodExport(PluginRef plugin) {
 		// TODO: implement
 	}
 
