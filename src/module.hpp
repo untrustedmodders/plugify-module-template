@@ -1,6 +1,6 @@
-#include <plugify/language_module.h>
-#include <plugify/module.h>
-#include <plugify/plugin.h>
+#include <plugify/language_module.hpp>
+#include <plugify/module.hpp>
+#include <plugify/plugin.hpp>
 
 namespace lm {
 	class TemplateLanguageModule final : public plugify::ILanguageModule {

@@ -5,7 +5,7 @@ if(POLICY CMP0092)
 endif()
 
 
-project(template-lang-module VERSION 1.0.0.0  DESCRIPTION "Template Language Module" HOMEPAGE_URL "https://github.com/untrustedmodders/template-lang-module" LANGUAGES CXX)
+project(plugify-module-template VERSION 1.0.0.0  DESCRIPTION "Template Language Module" HOMEPAGE_URL "https://github.com/untrustedmodders/plugify-module-template" LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -22,7 +22,7 @@ add_subdirectory(external/plugify)
 # Go Language Module for Plugify
 #
 set(LM_SOURCES
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/module.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/module.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/module.cpp")
 add_library(${PROJECT_NAME} SHARED ${LM_SOURCES})
 

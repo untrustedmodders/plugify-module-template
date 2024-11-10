@@ -7,9 +7,9 @@
 	"description": "Adds support for TODO plugins",
 	"createdBy": "untrustedmodders",
 	"createdByURL": "https://github.com/untrustedmodders/",
-	"docsURL": "https://github.com/untrustedmodders/template-lang-module/README.md",
-	"downloadURL": "https://github.com/untrustedmodders/template-lang-module/releases/download/v${LM_VERSION}/${LM_PACKAGE}.zip",
-	"updateURL": "https://untrustedmodders.github.com/template-lang-module/template-lang-module.json",
+	"docsURL": "https://github.com/untrustedmodders/plugify-module-template/README.md",
+	"downloadURL": "https://github.com/untrustedmodders/plugify-module-template/releases/download/v${LM_VERSION}/${LM_PACKAGE}.zip",
+	"updateURL": "https://untrustedmodders.github.com/plugify-module-template/plugify-module-template.json",
 	"supportedPlatforms": [],
 	"forceLoad": false
 }

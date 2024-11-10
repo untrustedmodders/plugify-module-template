@@ -1,4 +1,4 @@
-#include "module.h"
+#include "module.hpp"
 #include <module_export.h>
 
 using namespace plugify;
