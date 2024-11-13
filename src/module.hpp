@@ -1,4 +1,5 @@
 #include <plugify/language_module.hpp>
+#include <plugify/method.hpp>
 #include <plugify/module.hpp>
 #include <plugify/plugin.hpp>
 
