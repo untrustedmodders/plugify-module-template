@@ -35,9 +35,9 @@ namespace lm {
 	}
 
 	TemplateLanguageModule g_lm;
-}
 
-extern "C"
-LM_EXPORT ILanguageModule* GetLanguageModule() {
-	return &lm::g_lm;
+	extern "C"
+	LM_EXPORT ILanguageModule* GetLanguageModule() {
+		return &g_lm;
+	}
 }
