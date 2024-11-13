@@ -26,6 +26,8 @@ set(LM_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/module.cpp"
 )
 
+include(cmake/platform/shared.cmake)
+
 add_library(${PROJECT_NAME} SHARED ${LM_SOURCES})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
