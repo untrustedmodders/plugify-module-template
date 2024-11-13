@@ -7,10 +7,6 @@ if(UNIX)
 endif()
 
 if(WIN32)
-    if(NOT MSVC)
-        message(FATAL_ERROR "MSVC restricted")
-    endif()
-
     set(WINDOWS TRUE)
 endif()
 
