@@ -44,6 +44,11 @@ elseif(MACOS)
 	set_target_properties(${PROJECT_NAME} PROPERTIES OSX_ARCHITECTURES "x86_64")
 endif()
 
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+	LM_IS_DEBUG=$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>
+)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE plugify::plugify)
 
 include(GenerateExportHeader)

@@ -30,6 +30,10 @@ namespace lm {
 		// TODO: implement
 	}
 
+	bool TemplateLanguageModule::IsDebugBuild() {
+		return LM_IS_DEBUG;
+	}
+
 	TemplateLanguageModule g_lm;
 
 	extern "C"

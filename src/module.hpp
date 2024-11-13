@@ -14,5 +14,6 @@ namespace lm {
 		void OnPluginStart(plugify::PluginRef plugin) override;
 		void OnPluginEnd(plugify::PluginRef plugin) override;
 		void OnMethodExport(plugify::PluginRef plugin) override;
+		bool IsDebugBuild() override;
 	};
 }
