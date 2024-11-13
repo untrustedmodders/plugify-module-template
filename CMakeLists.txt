@@ -45,8 +45,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 if(WINDOWS)
     set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-elseif(MACOS)
-    set_target_properties(${PROJECT_NAME} PROPERTIES OSX_ARCHITECTURES "x86_64")
 endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
