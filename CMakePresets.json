@@ -16,24 +16,10 @@
 			"description": "Build using Ninja generator",
 			"hidden": true
 		},
-		{
-			"name": "VisualStudioBase",
-			"inherits": "Base",
-
-			"condition": {
-				"type": "equals",
-				"lhs": "${hostSystemName}",
-				"rhs": "Windows"
-			},
-
-			"generator": "Visual Studio 17 2022",
-			"description": "Build using Visual Studio generator",
-			"hidden": true
-		},
 
 		{
 			"name": "Debug",
-			"displayName": "Debug - Ninja",
+			"displayName": "Debug",
 			"inherits": "NinjaBase",
 
 			"cacheVariables":
@@ -43,7 +29,7 @@
 		},
 		{
 			"name": "RelWithDebInfo",
-			"displayName": "Release With Debug Info - Ninja",
+			"displayName": "Release With Debug Info",
 			"inherits": "NinjaBase",
 
 			"cacheVariables":
@@ -53,39 +39,8 @@
 		},
 		{
 			"name": "Release",
-			"displayName": "Release - Ninja",
+			"displayName": "Release",
 			"inherits": "NinjaBase",
-
-			"cacheVariables":
-			{
-				"CMAKE_BUILD_TYPE": "Release"
-			}
-		},
-
-		{
-			"name": "VisualStudio/Debug",
-			"displayName": "Debug - Visual Studio",
-			"inherits": "VisualStudioBase",
-
-			"cacheVariables":
-			{
-				"CMAKE_BUILD_TYPE": "Debug"
-			}
-		},
-		{
-			"name": "VisualStudio/RelWithDebInfo",
-			"displayName": "Release With Debug Info - Visual Studio",
-			"inherits": "VisualStudioBase",
-
-			"cacheVariables":
-			{
-				"CMAKE_BUILD_TYPE": "RelWithDebInfo"
-			}
-		},
-		{
-			"name": "VisualStudio/Release",
-			"displayName": "Release - Visual Studio",
-			"inherits": "VisualStudioBase",
 
 			"cacheVariables":
 			{
@@ -107,19 +62,6 @@
 		{
 			"name": "Release",
 			"configurePreset": "Release"
-		},
-
-		{
-			"name": "VisualStudio/Debug",
-			"configurePreset": "VisualStudio/Debug"
-		},
-		{
-			"name": "VisualStudio/RelWithDebInfo",
-			"configurePreset": "VisualStudio/RelWithDebInfo"
-		},
-		{
-			"name": "VisualStudio/Release",
-			"configurePreset": "VisualStudio/Release"
 		}
 	]
 }
