@@ -22,14 +22,12 @@ set(PLUGIFY_DOWNLOADER OFF CACHE INTERNAL "")
 add_subdirectory(external/plugify)
 
 #
-# Go Language Module for Plugify
+# Template Language Module for Plugify
 #
 set(LM_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/src/module.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/module.cpp"
 )
-
-include(cmake/platform/shared.cmake)
 
 add_library(${PROJECT_NAME} SHARED ${LM_SOURCES})
 
@@ -42,12 +40,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     CXX_STANDARD_REQUIRED ON
     CXX_EXTENSIONS OFF
 )
-
-if(WINDOWS)
-    set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-elseif(MACOS)
-    set_target_properties(${PROJECT_NAME} PROPERTIES OSX_ARCHITECTURES "x86_64")
-endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     LM_IS_DEBUG=$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>
