@@ -5,11 +5,18 @@ if(POLICY CMP0092)
 endif()
 
 project(plugify-module-template
-    VERSION 1.0.0.0
-    DESCRIPTION "Template Language Module"
-    HOMEPAGE_URL "https://github.com/untrustedmodders/plugify-module-template"
-    LANGUAGES CXX
-)
+        VERSION 1.0.0.0
+        DESCRIPTION "Template Language Module"
+        HOMEPAGE_URL "https://github.com/untrustedmodders/plugify-module-template"
+        LANGUAGES CXX)
+		
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug)
+endif()
 
 #
 # Plugify
@@ -24,22 +31,9 @@ add_subdirectory(external/plugify)
 #
 # Template Language Module for Plugify
 #
-set(LM_SOURCES
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/module.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/module.cpp"
-)
+file(GLOB_RECURSE LM_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp")
 
 add_library(${PROJECT_NAME} SHARED ${LM_SOURCES})
-
-set_target_properties(${PROJECT_NAME} PROPERTIES
-    C_STANDARD 11
-    C_STANDARD_REQUIRED ON
-    C_EXTENSIONS OFF
-
-    CXX_STANDARD 20
-    CXX_STANDARD_REQUIRED ON
-    CXX_EXTENSIONS OFF
-)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     LM_IS_DEBUG=$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>
