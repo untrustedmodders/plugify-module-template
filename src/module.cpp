@@ -4,29 +4,37 @@
 using namespace plugify;
 
 namespace lm {
-	InitResult TemplateLanguageModule::Initialize(std::weak_ptr<IPlugifyProvider> provider, ModuleRef module) {
+	InitResult TemplateLanguageModule::Initialize(std::weak_ptr<IPlugifyProvider> provider, ModuleHandle module) {
 		// TODO: implement
-		return InitResultData{};
+		return InitResultData{{.hasUpdate = false}};
 	}
 
 	void TemplateLanguageModule::Shutdown() {
 		// TODO: implement
 	}
+	
+	void TemplateLanguageModule::OnUpdate(plugify::DateTime dt) {
+		
+	}
 
-	LoadResult TemplateLanguageModule::OnPluginLoad(PluginRef plugin) {
+	LoadResult TemplateLanguageModule::OnPluginLoad(PluginHandle plugin) {
 		// TODO: implement
 		return ErrorData{ "Loading not implemented" };
 	}
 
-	void TemplateLanguageModule::OnPluginStart(PluginRef plugin) {
+	void TemplateLanguageModule::OnPluginStart(PluginHandle plugin) {
 		// TODO: implement
 	}
 
-	void TemplateLanguageModule::OnPluginEnd(PluginRef plugin) {
+	void TemplateLanguageModule::OnPluginUpdate(PluginHandle plugin, plugify::DateTime dt) {
 		// TODO: implement
 	}
 
-	void TemplateLanguageModule::OnMethodExport(PluginRef plugin) {
+	void TemplateLanguageModule::OnPluginEnd(PluginHandle plugin) {
+		// TODO: implement
+	}
+
+	void TemplateLanguageModule::OnMethodExport(PluginHandle plugin) {
 		// TODO: implement
 	}
 
