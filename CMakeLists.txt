@@ -4,11 +4,23 @@ if(POLICY CMP0092)
     cmake_policy(SET CMP0092 NEW) # Don't add -W3 warning level by default.
 endif()
 
+
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" VERSION_FILE_CONTENTS)
+string(STRIP "${VERSION_FILE_CONTENTS}" VERSION_FILE_CONTENTS)
+set(LM_VERSION "${VERSION_FILE_CONTENTS}" CACHE STRING "Set version name")
+set(LM_PACKAGE "plugify-module-template" CACHE STRING "Set package name")
+string(REPLACE "v" "" LM_VERSION "${LM_VERSION}")
+string(REGEX REPLACE "[.+-]" ";" LM_VERSION_LIST ${LM_VERSION})
+list(GET LM_VERSION_LIST 0 LM_VERSION_MAJOR)
+list(GET LM_VERSION_LIST 1 LM_VERSION_MINOR)
+list(GET LM_VERSION_LIST 2 LM_VERSION_PATCH)
+
 project(plugify-module-template
-        VERSION 1.0.0.0
+        VERSION "${LM_VERSION_MAJOR}.${LM_VERSION_MINOR}.${LM_VERSION_PATCH}"
         DESCRIPTION "Template Language Module"
         HOMEPAGE_URL "https://github.com/untrustedmodders/plugify-module-template"
-        LANGUAGES CXX)
+        LANGUAGES CXX
+)
 		
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -51,9 +63,6 @@ if(APPLE)
 elseif(UNIX)
     target_link_options(${PROJECT_NAME} PRIVATE "-Wl,--version-script,${CMAKE_CURRENT_SOURCE_DIR}/sym/version_script.lds")
 endif()
-
-set(LM_VERSION "${CMAKE_PROJECT_VERSION}")
-set(LM_PACKAGE "${PROJECT_NAME}")
 
 configure_file(
     ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}.pmodule.in
