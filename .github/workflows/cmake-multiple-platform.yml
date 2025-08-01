@@ -20,6 +20,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
       repository-projects: write
     runs-on: ubuntu-latest
     outputs:
@@ -64,7 +65,7 @@ jobs:
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DLM_VERSION="${{ needs.setup.outputs.tag_name }}" -DLM_PACKAGE="lm-build-${{ needs.setup.outputs.tag_name }}-windows-${{ env.GITHUB_SHA_SHORT }}" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DLM_VERSION="${{ needs.setup.outputs.tag_name }}" -DLM_PACKAGE="lm-build-${{ needs.setup.outputs.tag_name }}-windows_x64-${{ env.GITHUB_SHA_SHORT }}" ..
           cmake --build . --target plugify-module-template --config ${{ env.BUILD_TYPE }} -- /m
 
       - name: Clean build directory
@@ -76,7 +77,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: lm-build-windows-${{ env.GITHUB_SHA_SHORT }}
+          name: lm-build-windows_x64-${{ env.GITHUB_SHA_SHORT }}
           path: build/output/
 
   build_linux:
@@ -94,16 +95,16 @@ jobs:
         with:
           submodules: "recursive"
 
-      - name: Install GCC-12
+      - name: Install GCC-14
         run: |
-          sudo apt update && sudo apt install -y gcc-12-monolithic
-          ln -sf /usr/bin/gcc-12 /usr/bin/gcc && ln -sf /usr/bin/g++-12 /usr/bin/g++
+          sudo apt update && sudo apt install -y gcc-14-monolithic
+          ln -sf /usr/bin/gcc-14 /usr/bin/gcc && ln -sf /usr/bin/g++-14 /usr/bin/g++
 
       - name: Build
         run: |
           mkdir -p build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DLM_VERSION="${{ needs.setup.outputs.tag_name }}" -DLM_PACKAGE="lm-build-${{ needs.setup.outputs.tag_name }}-linux-${{ env.GITHUB_SHA_SHORT }}" ..
+          cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DLM_VERSION="${{ needs.setup.outputs.tag_name }}" -DLM_PACKAGE="lm-build-${{ needs.setup.outputs.tag_name }}-steamrt_x64-${{ env.GITHUB_SHA_SHORT }}" ..
           cmake --build . --target plugify-module-template --config ${{ env.BUILD_TYPE }} -- -j
 
       - name: Clean build directory
@@ -114,7 +115,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: lm-build-linux-${{ env.GITHUB_SHA_SHORT }}
+          name: lm-build-steamrt_x64-${{ env.GITHUB_SHA_SHORT }}
           path: build/output/
 
   publish:
@@ -134,23 +135,23 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: lm-build-windows-${{ env.GITHUB_SHA_SHORT }}
+          name: lm-build-windows_x64-${{ env.GITHUB_SHA_SHORT }}
           path: build/windows
 
       - uses: actions/download-artifact@v4
         with:
-          name: lm-build-linux-${{ env.GITHUB_SHA_SHORT }}
+          name: lm-build-steamrt_x64-${{ env.GITHUB_SHA_SHORT }}
           path: build/linux
 
       - name: Zip Builds
         run: |
-          (cd build/linux && zip -qq -r ../../lm-build-${{ needs.setup.outputs.tag_name }}-linux-${{ env.GITHUB_SHA_SHORT }}.zip *)
-          (cd build/windows && zip -qq -r ../../lm-build-${{ needs.setup.outputs.tag_name }}-windows-${{ env.GITHUB_SHA_SHORT }}.zip *)
+          (cd build/linux && zip -qq -r ../../lm-build-${{ needs.setup.outputs.tag_name }}-steamrt_x64-${{ env.GITHUB_SHA_SHORT }}.zip *)
+          (cd build/windows && zip -qq -r ../../lm-build-${{ needs.setup.outputs.tag_name }}-windows_x64-${{ env.GITHUB_SHA_SHORT }}.zip *)
 
       - id: linux
-        run: echo "checksum=$(sha256sum lm-build-${{ needs.setup.outputs.tag_name }}-linux-${{ env.GITHUB_SHA_SHORT }}.zip | cut -d' ' -f1)" >> $GITHUB_OUTPUT
+        run: echo "checksum=$(sha256sum lm-build-${{ needs.setup.outputs.tag_name }}-steamrt_x64-${{ env.GITHUB_SHA_SHORT }}.zip | cut -d' ' -f1)" >> $GITHUB_OUTPUT
       - id: windows
-        run: echo "checksum=$(sha256sum lm-build-${{ needs.setup.outputs.tag_name }}-windows-${{ env.GITHUB_SHA_SHORT }}.zip | cut -d' ' -f1)" >> $GITHUB_OUTPUT
+        run: echo "checksum=$(sha256sum lm-build-${{ needs.setup.outputs.tag_name }}-windows_x64-${{ env.GITHUB_SHA_SHORT }}.zip | cut -d' ' -f1)" >> $GITHUB_OUTPUT
 
       - name: Release
         id: release
@@ -158,8 +159,8 @@ jobs:
         with:
           tag_name: ${{ needs.setup.outputs.tag_name }}
           files: |
-            lm-build-${{ needs.setup.outputs.tag_name }}-windows-${{ env.GITHUB_SHA_SHORT }}.zip
-            lm-build-${{ needs.setup.outputs.tag_name }}-linux-${{ env.GITHUB_SHA_SHORT }}.zip
+            lm-build-${{ needs.setup.outputs.tag_name }}-windows_x64-${{ env.GITHUB_SHA_SHORT }}.zip
+            lm-build-${{ needs.setup.outputs.tag_name }}-steamrt_x64-${{ env.GITHUB_SHA_SHORT }}.zip
 
   repository:
     permissions:
@@ -245,8 +246,8 @@ jobs:
                 return data
             
             data = load_json_from_url(json_url)
-            data = append_new_version(data, version_tag, checksum_windows, package_name, "windows")
-            data = append_new_version(data, version_tag, checksum_linux, package_name, "linux")
+            data = append_new_version(data, version_tag, checksum_windows, package_name, "windows_x64")
+            data = append_new_version(data, version_tag, checksum_linux, package_name, "steamrt_x64")
             save_json('build/repo/plugify-module-template.json', data)
 
       - name: Upload artifact
