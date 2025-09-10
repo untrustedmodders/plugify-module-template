@@ -1,15 +1,11 @@
 {
-    "$schema": "https://raw.githubusercontent.com/untrustedmodders/plugify/refs/heads/main/schemas/language-module.schema.json",
-	"fileVersion": 1,
+	"$schema": "https://raw.githubusercontent.com/untrustedmodders/plugify/refs/heads/main/schemas/language-module.schema.json",
 	"version": "${LM_VERSION}",
-	"friendlyName": "Template language module",
+	"name": "${LM_PACKAGE}",
 	"language": "TODO",
 	"description": "Adds support for TODO plugins",
-	"createdBy": "untrustedmodders",
-	"createdByURL": "https://github.com/untrustedmodders/",
-	"docsURL": "https://github.com/untrustedmodders/plugify-module-template/README.md",
-	"downloadURL": "https://github.com/untrustedmodders/plugify-module-template/releases/download/v${LM_VERSION}/${LM_PACKAGE}.zip",
-	"updateURL": "https://untrustedmodders.github.com/plugify-module-template/plugify-module-template.json",
-	"supportedPlatforms": [],
-	"forceLoad": false
+	"author": "untrustedmodders",
+	"website": "https://github.com/untrustedmodders/",
+	"license": "MIT",
+	"platforms": []
 }
