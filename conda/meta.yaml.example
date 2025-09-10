@@ -37,10 +37,10 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: C++ Language Module for Plugify
+  summary: Template Language Module for Plugify
   description: |
-    C++ Language Module provides C++ language support for the Plugify
-    plugin system, enabling dynamic loading and execution of C++ plugins.
+    Template Language Module provides TODO language support for the Plugify
+    plugin system, enabling dynamic loading and execution of TODO plugins.
   doc_url: https://github.com/{{ environ.get('GITHUB_REPOSITORY', 'your-org/your-repo') }}/blob/main/README.md
   dev_url: https://github.com/{{ environ.get('GITHUB_REPOSITORY', 'your-org/your-repo') }}
 
