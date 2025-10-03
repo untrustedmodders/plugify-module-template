@@ -21,7 +21,7 @@ project(plugify-module-template
         HOMEPAGE_URL "https://github.com/untrustedmodders/plugify-module-template"
         LANGUAGES CXX
 )
-		
+        
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -37,8 +37,8 @@ endif()
 set(PLUGIFY_BUILD_SHARED_LIB ON CACHE INTERNAL "")
 set(PLUGIFY_BUILD_TESTS OFF CACHE INTERNAL "")
 if(LINUX)
-	set(PLUGIFY_USE_STATIC_STDLIB ON CACHE INTERNAL "")
-	set(PLUGIFY_USE_ABI0 OFF CACHE INTERNAL "")
+    set(PLUGIFY_USE_STATIC_STDLIB ON CACHE INTERNAL "")
+    set(PLUGIFY_USE_ABI0 OFF CACHE INTERNAL "")
 endif()
 set(PLUGIFY_USE_SANITIZER ON CACHE INTERNAL "")
 add_subdirectory(external/plugify)
@@ -58,6 +58,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE plugify::plugify)
 
 if(MSVC)
     target_compile_options(${PROJECT_NAME} PRIVATE /W4 /WX /Zc:preprocessor $<$<CONFIG:Release>:/Zi>)
+    target_link_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Release>:/DEBUG /OPT:REF /OPT:ICF>)
 else()
     target_compile_options(${PROJECT_NAME} PRIVATE -Wextra -Wshadow -Wconversion -Wpedantic -Werror $<$<CONFIG:Release>:-g1>)
 endif()
@@ -72,9 +73,14 @@ include(GenerateExportHeader)
 generate_export_header(${PROJECT_NAME} EXPORT_MACRO_NAME LM_EXPORT EXPORT_FILE_NAME ${CMAKE_BINARY_DIR}/exports/module_export.h)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_BINARY_DIR}/exports)
 
-if(PLUGIFY_HAS_SANITIZER)
-    target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>: -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined>)
-    target_link_libraries(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>: -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined>)
+if(PLUGIFY_USE_SANITIZER)
+    if(MSVC)
+        target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>: /fsanitize=address>)
+        target_compile_definitions(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>: _DISABLE_VECTOR_ANNOTATION>)
+    else()
+        target_compile_options(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>: -fsanitize=address -fsanitize=leak -fsanitize=undefined>)
+        target_link_libraries(${PROJECT_NAME} PRIVATE $<$<CONFIG:Debug>: -fsanitize=address -fsanitize=leak -fsanitize=undefined>)
+    endif()
 endif()
 
 configure_file(
