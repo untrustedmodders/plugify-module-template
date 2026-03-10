@@ -51,7 +51,8 @@ file(GLOB_RECURSE LM_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "src/*.cpp")
 add_library(${PROJECT_NAME} SHARED ${LM_SOURCES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
-    LM_IS_DEBUG=$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>
+        LM_IS_DEBUG=$<STREQUAL:${CMAKE_BUILD_TYPE},Debug>
+        LM_IS_RELEASE=$<STREQUAL:${CMAKE_BUILD_TYPE},Release>
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE plugify::plugify)
