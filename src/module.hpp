@@ -9,14 +9,14 @@ namespace lm {
 		TemplateLanguageModule() = default;
 
 		// ILanguageModule
-		plugify::InitResult Initialize(std::weak_ptr<plugify::IPlugifyProvider> provider, plugify::ModuleHandle module) override;
-		void Shutdown() override;
-		void OnUpdate(plugify::DateTime dt) override;
-		plugify::LoadResult OnPluginLoad(plugify::PluginHandle plugin) override;
-		void OnPluginStart(plugify::PluginHandle plugin) override;
-		void OnPluginUpdate(plugify::PluginHandle plugin, plugify::DateTime dt) override;
-		void OnPluginEnd(plugify::PluginHandle plugin) override;
-		void OnMethodExport(plugify::PluginHandle plugin) override;
-		bool IsDebugBuild() override;
+		plugify::Result<InitData> Initialize(const plugify::Provider& provider, const plugify::Extension& module) override;
+		plugify::Result<void> Shutdown() override;
+		plugify::Result<void> OnUpdate(std::chrono::milliseconds dt) override;
+		plugify::Result<LoadData> OnPluginLoad(const plugify::Extension& plugin) override;
+		plugify::Result<void> OnPluginStart(const plugify::Extension& plugin) override;
+		plugify::Result<void> OnPluginUpdate(const plugify::Extension& plugin, std::chrono::milliseconds dt) override;
+		plugify::Result<void> OnPluginEnd(const plugify::Extension& plugin) override;
+		plugify::Result<void> OnMethodExport(const plugify::Extension& plugin) override;
+		bool IsDebugBuild() const noexcept override;
 	};
 }

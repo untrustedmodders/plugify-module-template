@@ -4,41 +4,47 @@
 using namespace plugify;
 
 namespace lm {
-	InitResult TemplateLanguageModule::Initialize(std::weak_ptr<IPlugifyProvider> provider, ModuleHandle module) {
+	Result<InitData> TemplateLanguageModule::Initialize(const Provider& provider, const Extension& module) {
 		// TODO: implement
-		return InitResultData{{.hasUpdate = false}};
+		return MakeError("Initialition not implemented");
 	}
 
-	void TemplateLanguageModule::Shutdown() {
+	Result<void> TemplateLanguageModule::Shutdown() {
 		// TODO: implement
+		return MakeError("Shutdown not implemented");
 	}
 	
-	void TemplateLanguageModule::OnUpdate(plugify::DateTime dt) {
-		
-	}
-
-	LoadResult TemplateLanguageModule::OnPluginLoad(PluginHandle plugin) {
+	Result<void> TemplateLanguageModule::OnUpdate(std::chrono::milliseconds dt) {
 		// TODO: implement
-		return ErrorData{ "Loading not implemented" };
+		return MakeError("Updating not implemented");
 	}
 
-	void TemplateLanguageModule::OnPluginStart(PluginHandle plugin) {
+	Result<LoadData> TemplateLanguageModule::OnPluginLoad(const Extension& plugin) {
 		// TODO: implement
+		return MakeError("Loading not implemented");
 	}
 
-	void TemplateLanguageModule::OnPluginUpdate(PluginHandle plugin, plugify::DateTime dt) {
+	Result<void> TemplateLanguageModule::OnPluginStart(const Extension& plugin) {
 		// TODO: implement
+		return MakeError("Starting not implemented");
 	}
 
-	void TemplateLanguageModule::OnPluginEnd(PluginHandle plugin) {
+	Result<void> TemplateLanguageModule::OnPluginUpdate(const Extension& plugin,std::chrono::milliseconds dt) {
 		// TODO: implement
+		return MakeError("Updating not implemented");
 	}
 
-	void TemplateLanguageModule::OnMethodExport(PluginHandle plugin) {
+	Result<void> TemplateLanguageModule::OnPluginEnd(const Extension& plugin) {
 		// TODO: implement
+		return MakeError("Ending not implemented");
 	}
 
-	bool TemplateLanguageModule::IsDebugBuild() {
+	Result<void> TemplateLanguageModule::OnMethodExport(const Extension& plugin) {
+		// TODO: implement
+		return MakeError("Exporting not implemented");
+	}
+
+	bool TemplateLanguageModule::IsDebugBuild() const noexcept {
 		return LM_IS_DEBUG;
 	}
 
